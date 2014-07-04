@@ -17,6 +17,7 @@ public class Plane {
 
     Plane () {
         tx = new Texture("redplane.png");
+
         TextureRegion[][] tmp = TextureRegion.split(tx, tx.getWidth()/NUM_FRAMES, tx.getHeight());
         frames = new TextureRegion[NUM_FRAMES];
         int index = 0;

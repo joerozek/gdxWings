@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TitleScreen implements Screen {
     WingsGame game;
@@ -12,6 +14,7 @@ public class TitleScreen implements Screen {
     Plane plane;
     Texture phone;
     OrthographicCamera camera;
+    BitmapFont font;
 
     TitleScreen(final WingsGame gam) {
         game = gam;
@@ -19,6 +22,9 @@ public class TitleScreen implements Screen {
         camera.setToOrtho(false, 800, 450);
         background = new Texture("background.png");
         plane = new Plane();
+        Texture fontTexture = new Texture("alphabet-export-export.png");
+        font = new BitmapFont(Gdx.files.internal("alphabet-export-export.fnt"), new TextureRegion(fontTexture), false);
+
     }
 
     @Override
@@ -33,6 +39,7 @@ public class TitleScreen implements Screen {
 //        game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
 //        game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         game.batch.draw(background, 0, 0);
+        font.draw(game.batch, "WINGS", 100, 300);
         game.batch.draw(plane.getAnimationFrame(), 25, 25);
         game.batch.end();
     }
