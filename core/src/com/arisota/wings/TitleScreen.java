@@ -55,9 +55,11 @@ public class TitleScreen implements Screen {
         instructions2.setFontScale(0.45f);
 
         AnimatedTexture plane = new AnimatedTexture("redplane.png", 2, 15f);
+        Image strings = new Image(new Texture("strings.png"));
         AnimatedTexture phone = new AnimatedTexture("phone.png", 2, 1.5f);
         Timeline.createSequence()
-            .push(Tween.set(plane, ActorAccessor.POSITION_XY).target(-400f, 242f))
+            .push(Tween.set(plane, ActorAccessor.POSITION_XY).target(-400f, 218f))
+            .push(Tween.set(strings, ActorAccessor.POSITION_XY).target(-523f, 215f))
             .push(Tween.set(title, ActorAccessor.POSITION_XY).target(-900, 240f))
             .push(Tween.set(instructions, ActorAccessor.POSITION_XY).target(275, 90f))
             .push(Tween.set(instructions2, ActorAccessor.POSITION_XY).target(220, 50f))
@@ -67,12 +69,15 @@ public class TitleScreen implements Screen {
             .push(Tween.set(instructions, ActorAccessor.ALPHA).target(0.0f))
             .push(Tween.set(instructions2, ActorAccessor.ALPHA).target(0.0f))
             .beginParallel()
-            .push(Tween.to(plane, ActorAccessor.POSITION_XY, 3f).target(700, 242).ease(TweenEquations.easeNone))
-            .push(Tween.to(title, ActorAccessor.POSITION_XY, 3f).target(213, 240).ease(TweenEquations.easeNone))
+            .push(Tween.to(plane, ActorAccessor.POSITION_X, 3f).target(700).ease(TweenEquations.easeNone))
+            .push(Tween.to(strings, ActorAccessor.POSITION_X, 3f).target(577).ease(TweenEquations.easeNone))
+            .push(Tween.to(title, ActorAccessor.POSITION_X, 3f).target(213).ease(TweenEquations.easeNone))
             .end()
             .beginParallel()
-            .push(Tween.to(plane, ActorAccessor.POSITION_XY, 1f).target(939, 242).ease(TweenEquations.easeNone))
+            .push(Tween.to(plane, ActorAccessor.POSITION_X, 1f).target(939).ease(TweenEquations.easeNone))
+            .push(Tween.to(strings, ActorAccessor.POSITION_XY, 0.3f).target(667, 140).ease(TweenEquations.easeNone))
             .push(Tween.to(phone, ActorAccessor.ALPHA, 1f).target(1.0f).ease(TweenEquations.easeNone))
+            .push(Tween.to(strings, ActorAccessor.ALPHA, 0.3f).target(0f).ease(TweenEquations.easeNone))
             .push(Tween.to(instructions, ActorAccessor.ALPHA, 1f).target(1.0f).ease(TweenEquations.easeNone))
             .push(Tween.to(soundButton, ActorAccessor.ALPHA, 1f).target(1.0f).ease(TweenEquations.easeNone))
             .push(Tween.to(instructions2, ActorAccessor.ALPHA, 1f).target(1.0f).ease(TweenEquations.easeNone))
@@ -80,6 +85,7 @@ public class TitleScreen implements Screen {
             .start(manager);
 
         stage.addActor(background);
+        stage.addActor(strings);
         stage.addActor(plane);
         stage.addActor(phone);
         stage.addActor(title);
@@ -98,12 +104,11 @@ public class TitleScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                System.out.println("clicked start");
+                game.setScreen(game.play);
             }
         });
         return start;
     }
-
 
     private ImageButton makeSoundButton() {
         Texture buttons = new Texture("speaker_on_off.png");
@@ -118,7 +123,6 @@ public class TitleScreen implements Screen {
         btn.setHeight(85f);
         btn.setWidth(85f);
         btn.setChecked(prefs.getBoolean(SOUND_DISABLED));
-        System.out.println("init checked " + btn.isChecked());
         btn.addListener(new ClickListener() {
             @Override
             public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {

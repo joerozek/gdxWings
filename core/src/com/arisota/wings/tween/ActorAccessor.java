@@ -14,6 +14,7 @@ public class ActorAccessor implements TweenAccessor<Actor>
     public static final int POSITION_XY = 1;
     public static final int SCALE_XY = 2;
     public static final int ALPHA = 3;
+    public static final int POSITION_X = 4;
 
     @Override
     public int getValues(Actor target, int tweenType, float[] returnValues)
@@ -24,7 +25,9 @@ public class ActorAccessor implements TweenAccessor<Actor>
                 returnValues[0] = target.getX();
                 returnValues[1] = target.getY();
                 return 2;
-
+            case POSITION_X:
+                returnValues[0] = target.getX();
+                return 1;
             case SCALE_XY:
                 returnValues[0] = target.getX();
                 returnValues[1] = target.getY();
@@ -46,6 +49,9 @@ public class ActorAccessor implements TweenAccessor<Actor>
             case POSITION_XY:
                 target.setX(newValues[0]);
                 target.setY(newValues[1]);
+                break;
+            case POSITION_X:
+                target.setX(newValues[0]);
                 break;
             case SCALE_XY:
                 target.setScaleX(newValues[0]);

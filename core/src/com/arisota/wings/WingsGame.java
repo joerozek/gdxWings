@@ -1,15 +1,16 @@
 package com.arisota.wings;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WingsGame extends Game {
-	SpriteBatch batch;
+    public TitleScreen title;
+    public PlayScreen play;
 
 	@Override
 	public void create () {
-        batch = new SpriteBatch();
-        setScreen(new TitleScreen(this));
+        title = new TitleScreen(this);
+        play = new PlayScreen(this);
+        setScreen(title);
 	}
 
 	@Override
@@ -18,7 +19,5 @@ public class WingsGame extends Game {
 	}
 
     @Override
-    public void dispose() {
-        batch.dispose();
-    }
+    public void dispose() { }
 }
