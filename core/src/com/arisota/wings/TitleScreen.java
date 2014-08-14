@@ -103,6 +103,7 @@ public class TitleScreen implements Screen {
         start.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                System.out.println("play game");
                 super.clicked(event, x, y);
                 game.setScreen(game.play);
             }
